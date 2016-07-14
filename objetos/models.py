@@ -2,7 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.utils import timezone
 
-# Create your models here.
+#Objeto de Ingrediente de pesquisa
 class Ingrediente(models.Model):
 	descricao = models.CharField(max_length=150)
 	imagem = models.CharField(max_length=500)
@@ -12,6 +12,7 @@ class Ingrediente(models.Model):
 		return self.descricao
 
 
+#Objeto de Usuário do site
 class Usuario(models.Model):
 	nome = models.CharField(max_length=150)
 	imagem = models.CharField(max_length=500)
@@ -22,6 +23,7 @@ class Usuario(models.Model):
 		return self.nome
 
 
+#Objeto de Imagem do site
 class Imagem(models.Model):
 	descricao = models.CharField(max_length=150)
 	url = models.CharField(max_length=500)
@@ -29,6 +31,7 @@ class Imagem(models.Model):
 	def __str__(self):
 		return self.descricao
 
+#Objeto de receita
 class Receita(models.Model):
 	descricao = models.CharField(max_length=250)
 	modo_preparo = models.CharField(max_length=1000)
@@ -41,6 +44,7 @@ class Receita(models.Model):
 		return self.descricao
 
 
+#Objeto de Comentário das receitas feito por usuário
 class Comentario(models.Model):
 	autor = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 	mensagem = models.CharField(max_length=300)
