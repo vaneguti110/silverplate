@@ -35,6 +35,7 @@ class Receita(models.Model):
 	ingredientes = models.ManyToManyField(Ingrediente)
 	autor = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 	imagens = models.ManyToManyField(Imagem)
+	descricao_ingredientes = models.CharField(max_length = 500)
 	
 	def __str__(self):
 		return self.descricao
