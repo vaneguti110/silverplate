@@ -31,7 +31,7 @@ class Imagem(models.Model):
 	def __str__(self):
 		return self.descricao
 
-#Objeto de receita
+#Objeto de receitas 
 class Receita(models.Model):
 	descricao = models.CharField(max_length=250)
 	modo_preparo = models.CharField(max_length=1000)
