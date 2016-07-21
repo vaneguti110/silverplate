@@ -1,33 +1,12 @@
-from html.parser import HTMLParser
+from LinkFinder import LinkFinder
 import urllib.request
-
-class MyHTMLParser(HTMLParser):
-
-	links = []
-
-
-	def handle_starttag(self, tag, attrs):
-		if str(tag) == 'a':
-			for attr in attrs:
-				for inn in attr:
-					if 'http' in inn and 'comidaereceitas.com' in inn and not 'whatsapp' in inn and not 'facebook' in inn:
-						self.push(inn)
-
-	def push(self, link):
-		for ilink in self.links:
-			if ilink == link:
-				return
-
-		self.links.append(link)
-
-
 
 #Inicialização
 response = urllib.request.urlopen('https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html')
 html = response.read().decode('utf-8')
-parser = MyHTMLParser()
+parser = LinkFinder()
 parser.feed(html)
-acessos = 50
+acessos = 5
 i = 0
 while acessos > 0:
 	link = parser.links[i]
@@ -40,3 +19,7 @@ while acessos > 0:
 	acessos -= 1
 	
 print('links encontrados' + str(len(parser.links)))
+print('vai iniciar o processo de coleta de dados')
+for link in parser.links:
+	response = urllib.request.urlopen(link)
+	html = response.read().decode('utf-8')
