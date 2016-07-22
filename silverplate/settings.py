@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'objetos'
+    'objetos',
+    'crawler'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -87,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'silverplate',
         'USER': 'postgres',
-        'PASSWORD': '',
+        'PASSWORD': '123',
         'HOST': 'localhost',
         'PORT': '5432',
     }

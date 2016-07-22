@@ -16,7 +16,7 @@ class Ingrediente(models.Model):
 class Usuario(models.Model):
 	nome = models.CharField(max_length=150)
 	imagem = models.CharField(max_length=500)
-	senha = models.CharField(max_length=300)
+	senha = models.CharField(max_length=300) 
 	sexo = models.CharField(max_length=1)
 
 	def __str__(self):
