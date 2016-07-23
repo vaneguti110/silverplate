@@ -43,6 +43,11 @@ class Receita(models.Model):
 	def __str__(self):
 		return self.descricao
 
+#Objeto de receitas
+class Receita_Ingrediente(models.Model):
+	ingrediente = models.OneToOneField(Ingrediente)
+	receita = models.OneToOneField(Receita)
+	descricao = models.CharField(max_length=500)
 
 #Objeto de Comentário das receitas feito por usuário
 class Comentario(models.Model):

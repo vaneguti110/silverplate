@@ -11,13 +11,14 @@ django.setup()
 from crawler.models import Dados_Ingrediente
 
 
-#Inicialização
+#Inicialização - Le Links da pagina
 response = urllib.request.urlopen('https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html')
 html = response.read().decode('utf-8')
 parser = LinkFinder()
 parser.feed(html)
 parser.push('https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html')
-acessos = 20
+
+acessos = 
 i = 0
 while acessos > 0:
 	link = parser.links[i]
@@ -31,6 +32,7 @@ while acessos > 0:
 	
 print('links encontrados : ' + str(len(parser.links)))
 print('vai iniciar o processo de coleta de dados')
+
 DataParser = DataFinder()
 size = len(parser.links)
 for link in parser.links:
