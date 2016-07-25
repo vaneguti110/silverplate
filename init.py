@@ -18,7 +18,7 @@ parser = LinkFinder()
 parser.feed(html)
 parser.push('https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html')
 
-acessos = 
+acessos = 15
 i = 0
 while acessos > 0:
 	link = parser.links[i]
@@ -40,13 +40,9 @@ for link in parser.links:
 	response = urllib.request.urlopen(link)
 	html = response.read().decode('utf-8')
 	DataParser.feed(html)
-	print('processando o link %s, numero : %s' % (link , str(size)))
+	#print('processando o link %s, numero : %s' % (link , str(size)))
 
 print('Encontrei %s ingredientes' % len(DataParser.ingredientes))
-
-for ingrediente in DataParser.ingredientes:
-	dado = Dados_Ingrediente(Ingrediente=ingrediente, Receita="")
-	dado.save()
 
 
 '''response = urllib.request.urlopen('https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html')
