@@ -15,11 +15,11 @@ class DataFinder(HTMLParser):
 	current_receita = ""
 	countDivs = 0
 	countUl = 0
-	ingredientes = set()
+	ingredientes = 0
 
 	def __init__(self):
 		HTMLParser.__init__(self)
-		self.ingredientes = set()
+		self.ingredientes = 0
 
 	def handle_starttag(self, tag, attrs):
 		if str(tag) == 'div':
@@ -59,10 +59,8 @@ class DataFinder(HTMLParser):
 			if self.gravando==1:
 				if self.countUl == 1:
 					if self.current_receita != "":
+						self.ingredientes += 1
 						dados = Dados_Ingrediente(Ingrediente=data, Receita=self.current_receita)
 						dados.save()
 			if self.isNomeReceita:
 				self.current_receita = data
-				print(data)
-				#elif self.countUl == 2:
-					#print('Modo de Preparo : ' + data)

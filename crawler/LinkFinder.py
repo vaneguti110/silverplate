@@ -3,6 +3,9 @@ from html.parser import HTMLParser
 class LinkFinder(HTMLParser):
 
 	links = []
+	def __init__(self):
+		HTMLParser.__init__(self)
+		self.links = []
 
 
 	def handle_starttag(self, tag, attrs):
