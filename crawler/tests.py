@@ -1,7 +1,8 @@
 from django.test import TestCase
 from django.test import TestCase
 from crawler.LinkFinder import LinkFinder
-from crawler.DataFinder import DataFinder
+from crawler.DataFinder import IngredienteFinder
+from crawler.models import Dados_Ingrediente
 import urllib.request
 
 # Create your tests here.
@@ -21,9 +22,29 @@ class testCrawler(TestCase):
 		self.assertEqual(2, len(finder.links))
 
 	def test_ingredientes_encontrados(self):
-		dataFinder = DataFinder()
+		finder = IngredienteFinder()
 		link = 'https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html'
 		response = urllib.request.urlopen(link)
 		html = response.read().decode('utf-8')
-		dataFinder.feed(html)
-		self.assertEqual(8, dataFinder.ingredientes)
+		finder.feed(html)
+		self.assertEqual(8, finder.ingredientes)
+
+	def test_ingredientes_salvos_Banco(self):
+		ingredientes_salvos_banco = len(Dados_Ingrediente.objects.all())
+		print('quantidade ingredientes : %s' % ingredientes_salvos_banco)
+
+		#Processo data finder
+		finder = IngredienteFinder()
+		link = 'https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html'
+		response = urllib.request.urlopen(link)
+		html = response.read().decode('utf-8')
+		finder.feed(html)
+
+		#Valida se incluiu somente os encontrados
+		ingredientes_salvos_banco += 8
+		print('quantidade ingredientes agora : %s' % ingredientes_salvos_banco)
+		for ingrediente in Dados_Ingrediente.objects.all():
+			self.assertNotEqual(ingrediente.Ingrediente, '')
+			self.assertNotEqual(ingrediente.Receita, '')
+
+		self.assertEqual(ingredientes_salvos_banco, len(Dados_Ingrediente.objects.all()))

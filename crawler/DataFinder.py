@@ -6,9 +6,9 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
 import django
 django.setup()
 # your imports, e.g. Django models
-from crawler.models import Dados_Ingrediente
+from crawler.models import Dados_Ingrediente, Dados_Modo_Fazer
 
-class DataFinder(HTMLParser):
+class IngredienteFinder(HTMLParser):
 	gravando = 0
 	isMainText = 0
 	isNomeReceita = 0
@@ -16,6 +16,7 @@ class DataFinder(HTMLParser):
 	countDivs = 0
 	countUl = 0
 	ingredientes = 0
+	passos = 0
 
 	def __init__(self):
 		HTMLParser.__init__(self)
@@ -57,10 +58,17 @@ class DataFinder(HTMLParser):
 	def handle_data(self, data):
 		if str(data).strip() != "":
 			if self.gravando==1:
+				#UL DOS INGREDIENTES
 				if self.countUl == 1:
 					if self.current_receita != "":
 						self.ingredientes += 1
 						dados = Dados_Ingrediente(Ingrediente=data, Receita=self.current_receita)
+						dados.save()
+				#UL DO MODO DE FAZER
+				if self.countUl == 2:
+					if self.current_receita != "":
+						self.passos += 1
+						dados = Dados_Modo_Fazer(Descricao=data, Receita=self.current_receita)
 						dados.save()
 			if self.isNomeReceita:
 				self.current_receita = data

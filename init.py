@@ -1,5 +1,5 @@
 from crawler.LinkFinder import LinkFinder
-from crawler.DataFinder import DataFinder
+from crawler.DataFinder import IngredienteFinder
 import urllib.request
 
 import os
@@ -18,7 +18,7 @@ parser = LinkFinder()
 parser.feed(html)
 parser.push('https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html')
 
-acessos = 15
+acessos = 5
 i = 0
 while acessos > 0:
 	link = parser.links[i]
@@ -33,7 +33,7 @@ while acessos > 0:
 print('links encontrados : ' + str(len(parser.links)))
 print('vai iniciar o processo de coleta de dados')
 
-DataParser = DataFinder()
+DataParser = IngredienteFinder()
 size = len(parser.links)
 for link in parser.links:
 	size -= 1
@@ -42,7 +42,8 @@ for link in parser.links:
 	DataParser.feed(html)
 	#print('processando o link %s, numero : %s' % (link , str(size)))
 
-print('Encontrei %s ingredientes' % len(DataParser.ingredientes))
+print('Encontrei %s ingredientes' % DataParser.ingredientes)
+print('Encontrei %s Passos' % DataParser.passos)
 
 
 '''response = urllib.request.urlopen('https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html')
