@@ -18,7 +18,7 @@ parser = LinkFinder()
 parser.feed(html)
 parser.push('https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html')
 
-acessos = 5
+acessos = 10
 i = 0
 while acessos > 0:
 	link = parser.links[i]

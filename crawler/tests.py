@@ -23,11 +23,11 @@ class testCrawler(TestCase):
 
 	def test_ingredientes_encontrados(self):
 		finder = IngredienteFinder()
-		link = 'https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html'
+		link = 'https://www.comidaereceitas.com.br/bolos/bolo-de-cenoura-com-cobertura-de-chocolate.html'
 		response = urllib.request.urlopen(link)
 		html = response.read().decode('utf-8')
 		finder.feed(html)
-		self.assertEqual(8, finder.ingredientes)
+		self.assertEqual(10, finder.ingredientes)
 
 	def test_ingredientes_salvos_Banco(self):
 		ingredientes_salvos_banco = len(Dados_Ingrediente.objects.all())
@@ -35,16 +35,24 @@ class testCrawler(TestCase):
 
 		#Processo data finder
 		finder = IngredienteFinder()
-		link = 'https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html'
+		link = 'https://www.comidaereceitas.com.br/bolos/bolo-de-cenoura-com-cobertura-de-chocolate.html'
 		response = urllib.request.urlopen(link)
 		html = response.read().decode('utf-8')
 		finder.feed(html)
 
 		#Valida se incluiu somente os encontrados
-		ingredientes_salvos_banco += 8
+		ingredientes_salvos_banco += 10
 		print('quantidade ingredientes agora : %s' % ingredientes_salvos_banco)
 		for ingrediente in Dados_Ingrediente.objects.all():
 			self.assertNotEqual(ingrediente.Ingrediente, '')
 			self.assertNotEqual(ingrediente.Receita, '')
 
 		self.assertEqual(ingredientes_salvos_banco, len(Dados_Ingrediente.objects.all()))
+
+	def test_modo_fazer_encontrados(self):
+		finder = IngredienteFinder()
+		link = 'https://www.comidaereceitas.com.br/bolos/bolo-de-cenoura-com-cobertura-de-chocolate.html'
+		response = urllib.request.urlopen(link)
+		html = response.read().decode('utf-8')
+		finder.feed(html)
+		self.assertEqual(4, finder.passos)
