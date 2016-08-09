@@ -1,0 +1,38 @@
+{% extends 'silverplate/base.html' %}
+
+{% block content %}
+<h3>Identificação dos Ingredientes</h3>
+	<hr/>
+		<table class="pure-table pure-table-horizontal" style="width: 95%; font-family: 'Oxygen', sans-serif;" >
+			<thead>
+				<tr>
+					<td>
+						ID
+					</td>
+					<td>
+						Palavra
+					</td>
+					<td>
+						Contagem
+					</td>
+					<td>
+						Tipo
+					</td>
+					<td>
+						Ação
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for ingrediente in lista %}
+				<tr>
+					<td>{{ingrediente.id}}</td>
+					<td><input type='text' value='{{ingrediente.Palavra}}' id='palavra'/> </td>
+					<td>{{ingrediente.Count}}</td>
+					<td>{{ingrediente.Tipo}}</td>
+					<td><a href="escolher">Ingrediente</a> <a href="escolher">Associar</a> <a href="escolher">Excluir</a></td>
+				<tr>
+				{% endfor %}
+			</tbody>
+		</table>
+{% endblock %}

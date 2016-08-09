@@ -69,7 +69,7 @@ class IngredienteFinder(HTMLParser):
 			if self.gravando==1:
 				#UL DOS INGREDIENTES
 				if self.countUl >= 1 and not self.isModo_de_fazer:
-					if self.current_receita != "":
+					if self.current_receita != "" and "Receita" in self.current_receita:
 						self.ingredientes += 1
 						dados = Dados_Ingrediente(Ingrediente=data, Receita=self.current_receita, Grupo=self.grupo)
 						dados.save()
