@@ -3,7 +3,7 @@
 {% block content %}
 <h3>Identificação dos Ingredientes</h3>
 	<hr/>
-		<table class="pure-table pure-table-horizontal" style="width: 95%; font-family: 'Oxygen', sans-serif;" >
+		<table class="table table-striped table-hover" style="width: 95%; font-family: 'Oxygen', sans-serif;" >
 			<thead>
 				<tr>
 					<td>
@@ -26,11 +26,19 @@
 			<tbody>
 				{% for ingrediente in lista %}
 				<tr>
-					<td>{{ingrediente.id}}</td>
-					<td><input type='text' value='{{ingrediente.Palavra}}' id='palavra'/> </td>
+					<td><span class='label label-primary'>{{ingrediente.id}}</span></td>
+					<td>
+						<div class='form-group'>
+							<input class='form-control' type='text' value='{{ingrediente.Palavra}}' id='palavra'/> 
+						</div>
+					</td>
 					<td>{{ingrediente.Count}}</td>
 					<td>{{ingrediente.Tipo}}</td>
-					<td><a href="escolher">Ingrediente</a> <a href="escolher">Associar</a> <a href="escolher">Excluir</a></td>
+					<td>
+						<a class='btn btn-primary' href="escolher">Ingrediente</a>
+						<a class='btn btn-info' href="escolher">Associar</a>
+						<a class='btn btn-danger' href="escolher">Excluir</a>
+					</td>
 				<tr>
 				{% endfor %}
 			</tbody>
