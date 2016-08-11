@@ -26,19 +26,22 @@
 			<tbody>
 				{% for ingrediente in lista %}
 				<tr>
-					<td><span class='label label-primary'>{{ingrediente.id}}</span></td>
-					<td>
-						<div class='form-group'>
-							<input class='form-control' type='text' value='{{ingrediente.Palavra}}' id='palavra'/> 
-						</div>
-					</td>
-					<td>{{ingrediente.Count}}</td>
-					<td>{{ingrediente.Tipo}}</td>
-					<td>
-						<a class='btn btn-primary' href="escolher">Ingrediente</a>
-						<a class='btn btn-info' href="escolher">Associar</a>
-						<a class='btn btn-danger' href="escolher">Excluir</a>
-					</td>
+					<form  method='post'>
+    					{% csrf_token %}
+						<td><span class='label label-primary'>{{ingrediente.id}}</span></td>
+						<td>
+							<div class='form-group'>
+								<input class='form-control' type='text' value='{{ingrediente.Palavra}}' name='word' id='palavra'/> 
+							</div>
+						</td>
+						<td>{{ingrediente.Count}}</td>
+						<td>{{ingrediente.Tipo}}</td>
+						<td>
+							<button type='submit' class='btn btn-info' formaction="/crawl/salvar_ingrediente">É ingrediente</button>
+							<button type='submit' class='btn btn-warning' formaction="/crawl/salvar_palavra_ignorar">Ignorar palavra</button>
+							<button type='submit' class='btn btn-danger' formaction="/crawl/salvar_palavra_ignorar">Excluir palavra</button>
+						</td>
+					</form>
 				<tr>
 				{% endfor %}
 			</tbody>

@@ -6,7 +6,6 @@ from django.utils import timezone
 class Ingrediente(models.Model):
 	descricao = models.CharField(max_length=150)
 	imagem = models.CharField(max_length=500)
-	caloria = models.DecimalField(max_digits=5,decimal_places=2)
 
 	def __str__(self):
 		return self.descricao

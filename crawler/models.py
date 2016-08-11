@@ -22,3 +22,6 @@ class Ingrediente_Spec(models.Model):
 	Count = models.IntegerField()
 	Tipo = models.CharField(max_length=1)
 
+class Palavras_Ignorar(models.Model):
+	Palavra = models.CharField(max_length=500)
+

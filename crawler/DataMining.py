@@ -14,12 +14,9 @@ class Data_Mining():
 		self.lista = set()
 
 	def Analysis(self, ingrediente):
-		palavras = ingrediente.split(' ')
-		for palavra in palavras:
-			self.Salvar_Palavra(palavra)
+		self.Salvar_Palavra(ingrediente)
 
 	def Salvar_Palavra(self, palavra):
-		palavra = palavra.replace('.','').replace(',','')
 		encontrado = 0
 		for p in self.lista:
 			if palavra == p.valor:
