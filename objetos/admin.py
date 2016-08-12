@@ -1,13 +1,13 @@
 from django.contrib import admin
-from .models import Ingrediente, Usuario, Imagem, Receita, Comentario
+from .models import Ingredient, User, Image, Recipe, Comment
 # Register your models here.
 
-admin.site.register(Ingrediente)
+admin.site.register(Ingredient)
 
-admin.site.register(Usuario)
+admin.site.register(User)
 
-admin.site.register(Imagem)
+admin.site.register(Image)
 
-admin.site.register(Receita)
+admin.site.register(Recipe)
 
-admin.site.register(Comentario)
+admin.site.register(Comment)

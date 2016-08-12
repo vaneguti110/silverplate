@@ -1,7 +1,7 @@
 {% extends 'silverplate/base.html' %}
 
 {% block content %}
-<h3>Identificação dos Ingredientes</h3>
+<h3>Identify the ingredients</h3>
 	<hr/>
 		<table class="table table-striped table-hover" style="width: 95%; font-family: 'Oxygen', sans-serif;" >
 			<thead>
@@ -10,16 +10,16 @@
 						ID
 					</td>
 					<td>
-						Palavra
+						Word
 					</td>
 					<td>
-						Contagem
+						Count
 					</td>
 					<td>
-						Tipo
+						Type
 					</td>
 					<td>
-						Ação
+						Action
 					</td>
 				</tr>
 			</thead>
@@ -31,15 +31,15 @@
 						<td><span class='label label-primary'>{{ingrediente.id}}</span></td>
 						<td>
 							<div class='form-group'>
-								<input class='form-control' type='text' value='{{ingrediente.Palavra}}' name='word' id='palavra'/> 
+								<input class='form-control' type='text' value='{{ingrediente.Word}}' name='word' id='palavra'/> 
 							</div>
 						</td>
 						<td>{{ingrediente.Count}}</td>
-						<td>{{ingrediente.Tipo}}</td>
+						<td>{{ingrediente.Type}}</td>
 						<td>
-							<button type='submit' class='btn btn-info' formaction="/crawl/salvar_ingrediente">É ingrediente</button>
-							<button type='submit' class='btn btn-warning' formaction="/crawl/salvar_palavra_ignorar">Ignorar palavra</button>
-							<button type='submit' class='btn btn-danger' formaction="/crawl/salvar_palavra_ignorar">Excluir palavra</button>
+							<button type='submit' class='btn btn-info' formaction="/crawl/salvar_ingrediente">Is Ingredient</button>
+							<button type='submit' class='btn btn-warning' formaction="/crawl/salvar_palavra_ignorar">Ignore this word</button>
+							<button type='submit' class='btn btn-danger' formaction="/crawl/salvar_palavra_ignorar">Delete</button>
 						</td>
 					</form>
 				<tr>

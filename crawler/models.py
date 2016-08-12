@@ -1,27 +1,27 @@
 from django.db import models
 
 # Create your models here.
-class Dados_Ingrediente(models.Model):
-	Ingrediente = models.CharField(max_length=1000)
-	Receita = models.CharField(max_length=500)
-	Grupo = models.CharField(max_length=500, default='Ingredientes')
+class Data_Ingredient(models.Model):
+	Ingredient = models.CharField(max_length=1000)
+	Recipe = models.CharField(max_length=500)
+	Group = models.CharField(max_length=500, default='Ingredientes')
 
 	def __str__(self):
-		return self.descricao
+		return self.Ingredient
 
-class Dados_Modo_Fazer(models.Model):
-	Descricao = models.CharField(max_length=500)
-	Receita = models.CharField(max_length=500)
-	Grupo = models.CharField(max_length=500, default='Modo de Fazer')
+class Data_Way_Cooking(models.Model):
+	Description = models.CharField(max_length=500)
+	Recipe = models.CharField(max_length=500)
+	Group = models.CharField(max_length=500, default='Modo de Fazer')
 	
 	def __str__(self):
-		return self.descricao
+		return self.Description
 
-class Ingrediente_Spec(models.Model):
-	Palavra = models.CharField(max_length=500)
+class Ingredient_Spec(models.Model):
+	Word = models.CharField(max_length=500)
 	Count = models.IntegerField()
-	Tipo = models.CharField(max_length=1)
+	Type = models.CharField(max_length=1)
 
 class Palavras_Ignorar(models.Model):
-	Palavra = models.CharField(max_length=500)
+	Word = models.CharField(max_length=500)
 

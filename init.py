@@ -1,5 +1,5 @@
 from crawler.LinkFinder import LinkFinder
-from crawler.DataFinder import IngredienteFinder
+from crawler.DataFinder import IngredientFinder
 import urllib.request
 
 import os
@@ -8,7 +8,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
 import django
 django.setup()
 # your imports, e.g. Django models
-from crawler.models import Dados_Ingrediente
+from crawler.models import Data_Ingredient
 
 
 #Inicialização - Le Links da pagina
@@ -18,7 +18,7 @@ parser = LinkFinder()
 parser.feed(html)
 parser.push('https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html')
 
-acessos = 50
+acessos = 1
 i = 0
 while acessos > 0:
 	link = parser.links[i]
@@ -31,9 +31,9 @@ while acessos > 0:
 	acessos -= 1
 	
 print('links encontrados : ' + str(len(parser.links)))
-print('vai iniciar o processo de coleta de dados')
+print('Will start recovering data from the site')
 
-DataParser = IngredienteFinder()
+DataParser = IngredientFinder()
 size = len(parser.links)
 for link in parser.links:
 	size -= 1
@@ -42,10 +42,6 @@ for link in parser.links:
 	DataParser.feed(html)
 	#print('processando o link %s, numero : %s' % (link , str(size)))
 
-print('Encontrei %s ingredientes' % DataParser.ingredientes)
-print('Encontrei %s Passos' % DataParser.passos)
+print('Found %s ingredients' % DataParser.ingredientes)
+print('Found %s Steps Cooking' % DataParser.passos)
 
-
-'''response = urllib.request.urlopen('https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html')
-html = response.read().decode('utf-8')
-DataParser.feed(html)'''
