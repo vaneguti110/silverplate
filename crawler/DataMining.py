@@ -7,6 +7,9 @@ class Word():
 		self.count = 1
 
 
+'''
+Class responsible to compare replicated data and store in a special model Ingredient_Spec and agroup counting repetitions
+'''
 class Data_Mining():
 	list_words = set()
 

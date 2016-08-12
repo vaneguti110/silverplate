@@ -5,9 +5,14 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
 import django
 django.setup()
-# your imports, e.g. Django models
+
 from crawler.models import Data_Ingredient, Data_Way_Cooking
 
+'''
+Class responsible for find Data in the website that is being Crawled
+Using the Python Standard Library HTML PARSER to read HTML data and identify patterns of regular data store on database
+https://docs.python.org/2/library/htmlparser.html
+'''
 class IngredientFinder(HTMLParser):
 	recording = 0
 	isMainText = 0

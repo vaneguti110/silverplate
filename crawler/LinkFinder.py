@@ -1,5 +1,10 @@
 from html.parser import HTMLParser
 
+'''
+Class responsible for find new Links in HTML and store in a list 'self.links'
+Using the Python Standard Library HTML PARSER to read HTML data and identify patterns of regular data store on database
+https://docs.python.org/2/library/htmlparser.html
+'''
 class LinkFinder(HTMLParser):
 
 	links = []

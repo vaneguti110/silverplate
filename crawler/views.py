@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 
-from .models import Ingredient_Spec, Palavras_Ignorar
+from .models import Ingredient_Spec, Ignore_Words
 from objetos.models import Ingredient
 
 # Create your views here.
@@ -14,44 +14,45 @@ def salvar_palavra_ignorar(request):
 		word = request.POST.get('word')
 		word = word.strip()
 		if not exists_palavra_ignorar(word):
-			atualizar_spec(word)
-			Ignorar = Palavras_Ignorar(Palavra=word)
+			update_spec(word)
+			Ignorar = Ignore_Words(Word=word)
 			Ignorar.save()
 
 			Ingredients = Ingredient.objects.all()
 			for ing in Ingredients:
-				limpeza_specs(ing.descricao)
+				clear_specs(ing.description)
 
 	return HttpResponseRedirect('/crawl')
 
 def salvar_Ingrediente(request):
 	if request.method == 'POST':
-		novo_Ingredient = request.POST.get('word')
-		ing = Ingredient(descricao = novo_Ingredient.title())
+		new_ingredient = request.POST.get('word')
+		ing = Ingredient(description = new_ingredient.title())
 		ing.save()
 
-		limpeza_specs(novo_Ingredient)
+		clear_specs(new_ingredient)
 	return HttpResponseRedirect('/crawl')
 
-def atualizar_spec(pal_ignorar):
-	lista = Ingredient_Spec.objects.order_by('-Count')
-	for Ingredient in lista:
-		Ingredient.Palavra = Ingredient.Palavra.replace(pal_ignorar, '').strip()
+def update_spec(pal_ignorar):
+	list_ingredients = Ingredient_Spec.objects.order_by('-Count')
+	for Ingredient in list_ingredients:
+		Ingredient.Word = Ingredient.Word.replace(pal_ignorar, '').strip()
+		print(Ingredient)
 		Ingredient.save()
 
 
-def exists_palavra_ignorar(palavra):
+def exists_palavra_ignorar(word):
 	try:
-		existe_palavra = Palavras_Ignorar.objects.get(Palavra=palavra)
+		existe_palavra = Ignore_Words.objects.get(Word=word)
 		return 1
-	except Palavras_Ignorar.DoesNotExist:
+	except Ignore_Words.DoesNotExist:
 		return 0
 
-def limpeza_specs(novo_Ingredient):
+def clear_specs(new_ingredient):
 	try:
-		print(novo_Ingredient.title())
-		lista_excluir = Ingredient_Spec.objects.filter(Palavra=novo_Ingredient.lower())
-		for spec in lista_excluir:
+		print(new_ingredient.title())
+		delete_list = Ingredient_Spec.objects.filter(Word=new_ingredient.lower())
+		for spec in delete_list:
 			spec.delete()
 	except Ingredient_Spec.DoesNotExist:
 		print('sem chance')
