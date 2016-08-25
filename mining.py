@@ -20,7 +20,7 @@ for ingrediente in ingredients:
 	count += 1
 
 for pal in Mining.list_words:
-	spec = Ingredient_Spec(Word=pal.value, Count=pal.count, Type='n')
+	spec = Ingredient_Spec(Word=pal.value.lower(), Count=pal.count, Type='n')
 	spec.save()
 
 
