@@ -24,6 +24,16 @@ def salvar_palavra_ignorar(request):
 
 	return HttpResponseRedirect('/crawl')
 
+def delete_spec(request):
+	print ("111111")
+	if request.method == 'POST':
+		spec_id = request.POST.get('id')
+		word = request.POST.get('word')
+		spec = Ingredient_Spec(id=spec_id,Word=word)
+		spec.delete()
+
+	return HttpResponseRedirect('/crawl')
+
 def salvar_Ingrediente(request):
 	if request.method == 'POST':
 		new_ingredient = request.POST.get('word')

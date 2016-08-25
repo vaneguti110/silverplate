@@ -28,7 +28,7 @@
 				<tr>
 					<form  method='post'>
     					{% csrf_token %}
-						<td><span class='label label-primary'>{{ingrediente.id}}</span></td>
+						<td><input class='label label-primary' type='text' value='{{ingrediente.id}}' name='id'>{{ingrediente.id}}</span></td>
 						<td>
 							<div class='form-group'>
 								<input class='form-control' type='text' value='{{ingrediente.Word}}' name='word' id='palavra'/> 
@@ -39,7 +39,7 @@
 						<td>
 							<button type='submit' class='btn btn-info' formaction="/crawl/salvar_ingrediente">Is Ingredient</button>
 							<button type='submit' class='btn btn-warning' formaction="/crawl/salvar_palavra_ignorar">Ignore this word</button>
-							<button type='submit' class='btn btn-danger' formaction="/crawl/salvar_palavra_ignorar">Delete</button>
+							<button type='submit' class='btn btn-danger' formaction="/crawl/delete_spec">Delete</button>
 						</td>
 					</form>
 				<tr>
