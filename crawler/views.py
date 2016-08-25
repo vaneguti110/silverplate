@@ -25,7 +25,6 @@ def salvar_palavra_ignorar(request):
 	return HttpResponseRedirect('/crawl')
 
 def delete_spec(request):
-	print ("111111")
 	if request.method == 'POST':
 		spec_id = request.POST.get('id')
 		word = request.POST.get('word')
