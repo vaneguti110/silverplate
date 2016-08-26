@@ -23,7 +23,7 @@ class User(models.Model):
 
 class Image(models.Model):
     description = models.CharField(max_length=150)
-    url = models.CharField(max_length=500)
+    url = models.URLField()
 
     def __str__(self):
         return self.description
