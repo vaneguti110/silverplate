@@ -1,10 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
-
-
-
 class Data_Ingredient(models.Model):
     """"Class used to Store Ingredients of the recipes found in the crawling process"""
 
