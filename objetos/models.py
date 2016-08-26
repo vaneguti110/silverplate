@@ -1,6 +1,6 @@
 from django.db import models
-from datetime import datetime
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Ingredient(models.Model):
@@ -9,16 +9,6 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.description
-
-
-class User(models.Model):
-    name = models.CharField(max_length=150)
-    image = models.CharField(max_length=500)
-    password = models.CharField(max_length=300)
-    sex = models.CharField(max_length=1)
-
-    def __str__(self):
-        return self.name
 
 
 class Image(models.Model):
