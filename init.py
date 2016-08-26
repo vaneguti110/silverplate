@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
 from crawler.LinkFinder import LinkFinder
 from crawler.DataFinder import IngredientFinder
 import urllib.request
