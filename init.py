@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from crawler.LinkFinder import LinkFinder
 from crawler.DataFinder import IngredientFinder
 import urllib.request
