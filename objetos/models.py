@@ -30,7 +30,7 @@ class Recipe(models.Model):
         return self.description
 
 
-class Recipe_Ingredient(models.Model):
+class RecipeIngredient(models.Model):
     ingredient = models.OneToOneField(Ingredient)
     recipe = models.OneToOneField(Recipe)
     description = models.CharField(max_length=500)
