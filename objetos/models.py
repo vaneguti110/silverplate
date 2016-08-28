@@ -27,6 +27,8 @@ class Image(models.Model):
 		return self.descricao
 
 class Recipe(models.Model):
+	LANG=(('EN',"English"),('PT',"Portuguese"))
+	language= models.CharField(max_length=10, choices=LANG)
 	description = models.CharField(max_length=250)
 	step = models.CharField(max_length=1000)
 	ingredients = models.ManyToManyField(Ingredient)
