@@ -1,34 +1,22 @@
 #!/usr/bin/env python
-from crawler.LinkFinder import LinkFinder
-from crawler.DataFinder import IngredientFinder
-from crawler.DataMining import Data_Mining
-from crawler.models import Ingredient_Spec
-import urllib.request
-
 import os
+import django
+
+from crawler.DataMining import Data_Mining
+from crawler.models import IngredientSpec, DataIngredient
+
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
-import django
+
 django.setup()
 # your imports, e.g. Django models
-from crawler.models import Data_Ingredient
 
 Mining = Data_Mining()
-ingredients = Data_Ingredient.objects.all()
+ingredients = DataIngredient.objects.all()
 count = 0
-for ingrediente in ingredients:
-	Mining.Analysis(ingrediente.Ingredient)
-	count += 1
+for ingredient in ingredients:
+    Mining.Analysis(ingredient.ingredient)
+    count += 1
 
 for pal in Mining.list_words:
-	spec = Ingredient_Spec(Word=pal.value.lower(), Count=pal.count, Type='n')
-	spec.save()
-
-
-
-
-
-
-
-
-
+    IngredientSpec.objects.create(Word=pal.value.lower(), Count=pal.count, Type='n')
