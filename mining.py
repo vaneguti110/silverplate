@@ -2,14 +2,11 @@
 import os
 import django
 
-from crawler.DataMining import DataMining
-from crawler.models import IngredientSpec, DataIngredient
-
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
-
 django.setup()
-# your imports, e.g. Django models
+
+from crawler.data_mining import DataMining
+from crawler.models import DataIngredient
 
 mining = DataMining()
 ingredients = DataIngredient.objects.all()
@@ -18,5 +15,4 @@ for ingredient in ingredients:
     mining.analysis(ingredient.ingredient)
     count += 1
 
-for pal in mining.words:
-    IngredientSpec.objects.create(Word=pal.value.lower(), Count=pal.count, Type='n')
+mining.save_to_db()

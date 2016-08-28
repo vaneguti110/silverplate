@@ -3,11 +3,12 @@ import os
 import django
 import urllib.request
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
+django.setup()
+
 from crawler.LinkFinder import LinkFinder
 from crawler.DataFinder import IngredientFinder
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
-django.setup()
 
 # Inicialization
 response = urllib.request.urlopen('https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html')
