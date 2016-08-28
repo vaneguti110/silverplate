@@ -12,7 +12,7 @@ django.setup()
 from crawler.models import Data_Ingredient
 
 
-#Inicialização - Le Links da pagina
+#Inicialization
 response = urllib.request.urlopen('https://www.comidaereceitas.com.br/bolos/bolinho-de-chuva-pratico.html')
 html = response.read().decode('utf-8')
 parser = LinkFinder()
