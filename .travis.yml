@@ -2,11 +2,12 @@ language: python
 python:
   - "3.4"
   - "3.5"
+  - "nightly"
 install:
   - pip install -q -r requirements.txt
   - pip install -q coveralls
 script:
-  - coverage run --source=objeros,crawler manage.py test
+  - coverage run --source=objeros,crawler manage.py test --settings=silverplate.settings.test
 env:
   - DJANGO=1.9.7
   - DJANGO=1.10

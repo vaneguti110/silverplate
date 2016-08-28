@@ -2,7 +2,7 @@
 import os
 import django
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings.base")
 django.setup()
 
 from crawler.data_mining import DataMining

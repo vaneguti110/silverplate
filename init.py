@@ -3,7 +3,7 @@ import os
 import django
 import urllib.request
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings.base")
 django.setup()
 
 from crawler.LinkFinder import LinkFinder
