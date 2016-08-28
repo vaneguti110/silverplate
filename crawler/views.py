@@ -7,8 +7,8 @@ from objetos.models import Ingredient
 
 # Create your views here.
 def index(request):
-    lista = IngredientSpec.objects.order_by('-Count')[:20]
-    return render(request, 'index.html', {'lista': lista})
+    ingredients = IngredientSpec.objects.order_by('-count')[:20]
+    return render(request, 'crawler/index.html', {'ingredients': ingredients})
 
 
 def salvar_palavra_ignorar(request):
@@ -17,7 +17,7 @@ def salvar_palavra_ignorar(request):
         word = word.strip()
         if not exists_palavra_ignorar(word):
             update_spec(word)
-            Ignorar = Ignore_Words(Word=word)
+            Ignorar = IgnoredWords(Word=word)
             Ignorar.save()
 
             Ingredients = Ingredient.objects.all()
