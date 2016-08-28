@@ -1,13 +1,13 @@
-from html.parser import HTMLParser
-
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
 import django
-
-django.setup()
+from html.parser import HTMLParser
 
 from crawler.models import DataIngredient, DataWayCooking
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
+
+django.setup()
 
 
 class IngredientFinder(HTMLParser):
