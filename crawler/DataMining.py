@@ -9,7 +9,7 @@ class Word():
 
 class Data_Mining():
     """
-    Class responsible to compare replicated data and store in a special model Ingredient_Spec
+    Class responsible to compare replicated data and store in a special model IngredientSpec
     and agroup counting repetitions
     """
     list_words = set()
