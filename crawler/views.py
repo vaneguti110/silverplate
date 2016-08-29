@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
-from .models import Ingredient_Spec, Ignore_Words
+from .models import IngredientSpec, IgnoredWords
 from objetos.models import Ingredient
 
 
 # Create your views here.
 def index(request):
-    lista = Ingredient_Spec.objects.order_by('-Count')[:20]
-    return render(request, 'index.html', {'lista': lista})
+    ingredients = IngredientSpec.objects.order_by('-count')[:20]
+    return render(request, 'crawler/index.html', {'ingredients': ingredients})
 
 
 def salvar_palavra_ignorar(request):
@@ -17,7 +17,7 @@ def salvar_palavra_ignorar(request):
         word = word.strip()
         if not exists_palavra_ignorar(word):
             update_spec(word)
-            Ignorar = Ignore_Words(Word=word)
+            Ignorar = IgnoredWords(Word=word)
             Ignorar.save()
 
             Ingredients = Ingredient.objects.all()
@@ -31,7 +31,7 @@ def delete_spec(request):
     if request.method == 'POST':
         spec_id = request.POST.get('id')
         word = request.POST.get('word')
-        spec = Ingredient_Spec(id=spec_id, Word=word)
+        spec = IngredientSpec(id=spec_id, word=word)
         spec.delete()
 
     return HttpResponseRedirect('/crawl')
@@ -48,7 +48,7 @@ def salvar_Ingrediente(request):
 
 
 def update_spec(pal_ignorar):
-    list_ingredients = Ingredient_Spec.objects.order_by('-Count')
+    list_ingredients = IngredientSpec.objects.order_by('-Count')
     for Ingredient in list_ingredients:
         Ingredient.Word = Ingredient.Word.replace(pal_ignorar, '').strip()
         print(Ingredient)
@@ -57,17 +57,17 @@ def update_spec(pal_ignorar):
 
 def exists_palavra_ignorar(word):
     try:
-        existe_palavra = Ignore_Words.objects.get(Word=word)
+        existe_palavra = IgnoredWords.objects.get(word=word)
         return 1
-    except Ignore_Words.DoesNotExist:
+    except IgnoredWords.DoesNotExist:
         return 0
 
 
 def clear_specs(new_ingredient):
     try:
         print(new_ingredient.title())
-        delete_list = Ingredient_Spec.objects.filter(Word=new_ingredient.lower())
+        delete_list = IngredientSpec.objects.filter(word=new_ingredient.lower())
         for spec in delete_list:
             spec.delete()
-    except Ingredient_Spec.DoesNotExist:
+    except IngredientSpec.DoesNotExist:
         print('sem chance')

@@ -1,13 +1,13 @@
-from html.parser import HTMLParser
-
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
 import django
+from html.parser import HTMLParser
+
+from crawler.models import DataIngredient, DataWayCooking
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
 
 django.setup()
-
-from crawler.models import Data_Ingredient, Data_Way_Cooking
 
 
 class IngredientFinder(HTMLParser):
@@ -78,14 +78,12 @@ class IngredientFinder(HTMLParser):
                 if self.countUl >= 1 and not self.isCooking_Way:
                     if self.current_recipe != "" and "Receita" in self.current_recipe:
                         self.ingredientes += 1
-                        data_save = Data_Ingredient(Ingredient=data, Recipe=self.current_recipe, Group=self.grupo)
-                        data_save.save()
+                        DataIngredient.objects.create(ingredient=data, recipe=self.current_recipe, group=self.grupo)
                 # F
                 elif self.isCooking_Way:
                     if self.current_recipe != "":
                         self.passos += 1
-                        data_save = Data_Way_Cooking(Description=data, Recipe=self.current_recipe, Group=self.grupo)
-                        data_save.save()
+                        DataWayCooking.objects.create(description=data, recipe=self.current_recipe, group=self.grupo)
             if self.isRecipeName:
                 self.current_recipe = data
             if self.isGroup:

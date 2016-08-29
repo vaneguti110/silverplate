@@ -1,34 +1,34 @@
 from django.db import models
 
 
-class Data_Ingredient(models.Model):
+class DataIngredient(models.Model):
     """"Class used to Store Ingredients of the recipes found in the crawling process"""
 
-    Ingredient = models.CharField(max_length=1000)
-    Recipe = models.CharField(max_length=500)
-    Group = models.CharField(max_length=500, default='Ingredientes')
+    ingredient = models.CharField(max_length=1000)
+    recipe = models.CharField(max_length=500)
+    group = models.CharField(max_length=500, default='Ingredientes')
 
     def __str__(self):
-        return self.Ingredient
+        return self.ingredient
 
 
-class Data_Way_Cooking(models.Model):
+class DataWayCooking(models.Model):
     """Class used to Store steps of the recipes found in the crawling process"""
-    Description = models.CharField(max_length=500)
-    Recipe = models.CharField(max_length=500)
-    Group = models.CharField(max_length=500, default='Modo de Fazer')
+    description = models.CharField(max_length=500)
+    recipe = models.CharField(max_length=500)
+    group = models.CharField(max_length=500, default='Modo de Fazer')
 
     def __str__(self):
-        return self.Description
+        return self.description
 
 
-class Ingredient_Spec(models.Model):
+class IngredientSpec(models.Model):
     """Class used to manipulate Ingredients found and change data to data mining and found patterns of ingredients"""
-    Word = models.CharField(max_length=500)
-    Count = models.IntegerField()
-    Type = models.CharField(max_length=1)
+    word = models.CharField(max_length=500)
+    count = models.IntegerField()
+    type = models.CharField(max_length=1)
 
 
-class Ignore_Words(models.Model):
+class IgnoredWords(models.Model):
     """Model to store words to ignore from Ingredient Spec"""
-    Word = models.CharField(max_length=500)
+    word = models.CharField(max_length=500)
