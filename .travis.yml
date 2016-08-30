@@ -7,7 +7,7 @@ install:
   - pip install -q -r requirements.txt
   - pip install -q coveralls
 script:
-  - coverage run --source=objeros,crawler manage.py test --settings=silverplate.settings.test
+  - coverage run --source=objetos,crawler manage.py test --settings=silverplate.settings.test
 env:
   - DJANGO=1.9.7
   - DJANGO=1.10
