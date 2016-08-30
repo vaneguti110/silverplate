@@ -1,14 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.views.generic import ListView
 
 from .models import IngredientSpec, IgnoredWords
 from objetos.models import Ingredient
 
 
 # Create your views here.
-def index(request):
-    ingredients = IngredientSpec.objects.order_by('-count')[:20]
-    return render(request, 'crawler/index.html', {'ingredients': ingredients})
+class IngredientSpecList(ListView):
+    context_object_name = 'ingredients'
+    ordering = '-count'
+    model = IngredientSpec
+    paginate_by = 20
 
 
 def salvar_palavra_ignorar(request):
