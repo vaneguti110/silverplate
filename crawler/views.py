@@ -1,21 +1,24 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.views.generic import ListView
 
 from .models import IngredientSpec, IgnoredWords
 from objetos.models import Ingredient
 
 
 # Create your views here.
-def index(request):
-    ingredients = IngredientSpec.objects.order_by('-count')[:20]
-    return render(request, 'crawler/index.html', {'ingredients': ingredients})
+class IngredientSpecList(ListView):
+    context_object_name = 'ingredients'
+    ordering = '-count'
+    model = IngredientSpec
+    paginate_by = 20
 
 
 def salvar_palavra_ignorar(request):
     if request.method == 'POST':
         word = request.POST.get('word')
         word = word.strip()
-        if not exists_palavra_ignorar(word):
+        if not ignore_word_exists(word):
             update_spec(word)
             Ignorar = IgnoredWords(Word=word)
             Ignorar.save()
@@ -55,12 +58,8 @@ def update_spec(pal_ignorar):
         Ingredient.save()
 
 
-def exists_palavra_ignorar(word):
-    try:
-        existe_palavra = IgnoredWords.objects.get(word=word)
-        return 1
-    except IgnoredWords.DoesNotExist:
-        return 0
+def ignore_word_exists(word):
+    return IgnoredWords.objects.filter(word=word).exists()
 
 
 def clear_specs(new_ingredient):

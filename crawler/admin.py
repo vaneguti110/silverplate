@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import IngredientSpec
+
+
+@admin.register(IngredientSpec)
+class IngredientSpecAdmin(admin.ModelAdmin):
+    pass
