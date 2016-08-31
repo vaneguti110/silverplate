@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 
+
 class Ingredient(models.Model):
     description = models.CharField(max_length=150)
     image = models.CharField(max_length=500)
@@ -37,6 +38,12 @@ class RecipeIngredient(models.Model):
     ingredient = models.OneToOneField(Ingredient)
     recipe = models.OneToOneField(Recipe)
     description = models.CharField(max_length=500)
+
+
+class RecipeStep(models.Model):
+    '''Class with instructions step by step how to cook'''
+    step = models.CharField(max_length=500)
+    recipe = models.OneToOneField(Recipe)
 
 
 class Comment(models.Model):
