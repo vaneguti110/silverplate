@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Ingredient(models.Model):
-    description = models.CharField(max_length=150)
+    description = models.TextField()
     image = models.CharField(max_length=500)
 
     def __str__(self):
@@ -22,11 +22,12 @@ class Image(models.Model):
 class Recipe(models.Model):
     LANG = (('EN', "English"), ('PT', "Portuguese"))
 
-    step = models.CharField(max_length=1000)
-    ingredients = models.ManyToManyField(Ingredient)
+    title = models.CharField(max_length=128, db_index=True)
+    step = models.TextField()
+    ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     images = models.ManyToManyField(Image)
-    description = models.CharField(max_length=500)
+    description = models.TextField()
     language = models.CharField(max_length=10, choices=LANG)
 
     def __str__(self):
@@ -34,15 +35,16 @@ class Recipe(models.Model):
 
 
 class RecipeIngredient(models.Model):
-    ingredient = models.OneToOneField(Ingredient)
-    recipe = models.OneToOneField(Recipe)
-    description = models.CharField(max_length=500)
+    ingredient = models.ForeignKey(Ingredient)
+    recipe = models.ForeignKey(Recipe)
+    description = models.TextField()
 
 
 class Comment(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.CharField(max_length=300)
-    date_time = models.DateField(default=timezone.now)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True, db_index=True)
 
     def __str__(self):
         return self.message
