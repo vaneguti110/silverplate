@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from ..data_mining import DataMining
+from ..engine import DataMining
 from ..models import IngredientSpec
 
 

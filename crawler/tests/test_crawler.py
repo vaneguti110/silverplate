@@ -1,6 +1,5 @@
 from django.test import TestCase
-from crawler.LinkFinder import LinkFinder
-from crawler.DataFinder import IngredientFinder
+from crawler.engine import LinkFinder, IngredientFinder
 import urllib.request
 
 from ..models import DataIngredient

@@ -1,13 +1,37 @@
 import os
-
 import django
+from collections import Counter
 from html.parser import HTMLParser
 
-from crawler.models import DataIngredient, DataWayCooking
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings")
-
 django.setup()
+
+from .models import DataIngredient, DataWayCooking, IngredientSpec
+
+
+class LinkFinder(HTMLParser):
+    """
+    Class responsible for find new Links in HTML and store in a list 'self.links'
+    Using the Python Standard Library HTML PARSER to read HTML data and identify patterns of regular data store on database
+    https://docs.python.org/2/library/htmlparser.html
+    """
+
+    links = []
+
+    def __init__(self):
+        HTMLParser.__init__(self)
+        self.links = []
+
+    def handle_starttag(self, tag, attrs):
+        if str(tag) == 'a':
+            for attr in attrs:
+                for inn in attr:
+                    if inn != None and 'http' in inn and 'comidaereceitas.com' in inn and not 'whatsapp' in inn and not 'facebook' in inn:
+                        self.push(inn)
+
+    def push(self, link):
+        if link not in self.links:
+            self.links.append(link)
 
 
 class IngredientFinder(HTMLParser):
@@ -90,3 +114,28 @@ class IngredientFinder(HTMLParser):
                 self.grupo = data.strip()
                 if self.grupo == 'Modo de preparo':
                     self.isCooking_Way = 1
+
+
+class DataMining:
+    """
+    Class responsible for comparing replicated data and storing it in a special model IngredientSpec
+    and a group counting repetitions
+    """
+
+    def __init__(self):
+        self.words = Counter()
+
+    def analysis(self, ingredient):
+        self.save_words(ingredient.lower())
+
+    def save_words(self, word):
+        self.words[word] += 1
+
+    def save_to_db(self):
+        for word, count in self.words.items():
+            try:
+                ingredient = IngredientSpec.objects.get(word=word)
+                ingredient.count += count
+                ingredient.save()
+            except IngredientSpec.DoesNotExist:
+                IngredientSpec.objects.create(word=word, count=count, type='n')
