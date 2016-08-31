@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}NO TITLE GIVEN{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scal=1">
+    {% include "_imports.html" %}
+    <title>Silver plate - {% block title %}NO TITLE GIVEN{% endblock %}</title>
 </head>
 <body>
-    <div class="container">
-        {% block content %}<h1>No content defined</h1>{% endblock %}
-    </div>
+<div class="brand">Silver plate</div>
+{% include "_nav.html" %}
+<div class="container">
+    {% block content %}<h1>No content defined</h1>{% endblock %}
+</div>
+
+<!-- Script to Activate the Carousel -->
+<script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+</script>
 </body>
 </html>
