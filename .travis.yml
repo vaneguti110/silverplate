@@ -6,6 +6,7 @@ python:
 install:
   - pip install -q -r requirements.txt
   - pip install -q coveralls
+  - pip install -q django==$DJANGO
 script:
   - coverage run --source=objetos,crawler manage.py test --settings=silverplate.settings.test
 env:

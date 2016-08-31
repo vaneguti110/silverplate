@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
 
 
@@ -48,3 +47,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.message
+
+    def short_message(self):
+        if not self.message or len(self.message) < 15:
+            return self.message
+        return self.message[:15] + '...'
