@@ -1,7 +1,8 @@
 from django.test import TestCase
-from crawler.LinkFinder import LinkFinder
-from crawler.DataFinder import IngredientFinder
+from crawler.engine import LinkFinder, IngredientFinder
 import urllib.request
+
+from ..models import DataIngredient
 
 
 class CrawlerTestCase(TestCase):
@@ -28,7 +29,11 @@ class CrawlerTestCase(TestCase):
         response = urllib.request.urlopen(link)
         html = response.read().decode('utf-8')
         finder.feed(html)
-        self.assertEqual(12, finder.ingredientes)
+        self.assertEqual(12, finder.ingredientes, 'should be {}, is {}, stores in db {}'.format(
+            12,
+            finder.ingredientes,
+            str(DataIngredient.objects.all())
+        ))
 
     def test_way_cooking_found(self):
         """Evaluate if the quantity of way of cooking found on in a page is equal to the real amount expected"""

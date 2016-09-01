@@ -18,3 +18,8 @@ virtualenv -p python3 venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+
+## Template
+
+We have used for development a startbootstrap business casual template
+which is on MIT license.

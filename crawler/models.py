@@ -24,11 +24,11 @@ class DataWayCooking(models.Model):
 
 class IngredientSpec(models.Model):
     """Class used to manipulate Ingredients found and change data to data mining and found patterns of ingredients"""
-    word = models.CharField(max_length=500)
+    word = models.CharField(max_length=500, db_index=True)
     count = models.IntegerField(default=0)
     type = models.CharField(max_length=1)
 
 
 class IgnoredWords(models.Model):
     """Model to store words to ignore from Ingredient Spec"""
-    word = models.CharField(max_length=500)
+    word = models.CharField(max_length=500, db_index=True)

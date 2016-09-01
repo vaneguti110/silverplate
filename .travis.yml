@@ -1,4 +1,6 @@
 language: python
+services:
+  - postgresql
 python:
   - "3.4"
   - "3.5"
@@ -6,10 +8,15 @@ python:
 install:
   - pip install -q -r requirements.txt
   - pip install -q coveralls
+  - pip install -q django==$DJANGO
 script:
-  - coverage run --source=objetos,crawler manage.py test --settings=silverplate.settings.test
+  - coverage run --source=objetos,crawler manage.py test --settings=silverplate.settings.$ENV
 env:
-  - DJANGO=1.9.7
-  - DJANGO=1.10
+  - DJANGO=1.9.7 ENV=test
+  - DJANGO=1.10 ENV=test
+  - DJANGO=1.9.7 ENV=development
+  - DJANGO=1.10 ENV=development
 after_success:
   coveralls
+test:
+  adapter: postgresql

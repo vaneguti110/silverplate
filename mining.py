@@ -5,7 +5,7 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings.base")
 django.setup()
 
-from crawler.data_mining import DataMining
+from crawler.engine import DataMining
 from crawler.models import DataIngredient
 
 mining = DataMining()

@@ -6,8 +6,8 @@ import urllib.request
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "silverplate.settings.base")
 django.setup()
 
-from crawler.LinkFinder import LinkFinder
-from crawler.DataFinder import IngredientFinder
+from crawler.engine import LinkFinder
+from crawler.engine import IngredientFinder
 
 
 # Inicialization
